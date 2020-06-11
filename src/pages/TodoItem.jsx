@@ -31,7 +31,7 @@ class TodoItem extends React.Component {
         >
           {this.props.item}
         </li>
-        <button onClick={this.props.deleteItem}>X</button>
+        <button onClick={() => this.props.deleteItem(this.props.index)}>X</button>
       </div>
     )
   }

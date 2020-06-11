@@ -1,5 +1,5 @@
 import React from "react"
-import TodoItem from './TodoItem';
+import TodoItem from "./TodoItem"
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -22,11 +22,11 @@ class Navigation extends React.Component {
     })
   }
 
-  deleteItem = (index) => {
+  deleteItem = index => {
     let newItemList = this.state.todoItems;
-    newItemList.splice(index, 1);
-    this.setState({todoItems:newItemList})
-}
+    this.state.todoItems.splice(index, 1)
+    this.setState({ todoItems: newItemList })
+  }
 
   render() {
     return (
@@ -43,7 +43,13 @@ class Navigation extends React.Component {
 
         {this.state.todoItems.length > 0
           ? this.state.todoItems.map((item, index) => {
-              return <TodoItem item={item} index={index} deleteItem={this.deleteItem}></TodoItem>
+              return (
+                <TodoItem
+                  item={item}
+                  index={index}
+                  deleteItem={this.deleteItem}
+                ></TodoItem>
+              )
             })
           : ""}
       </div>
