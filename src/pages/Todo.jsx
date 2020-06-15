@@ -1,60 +1,45 @@
-import React from "react"
+import React, { useState } from "react"
 import TodoItem from "./TodoItem"
 
-class Navigation extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      inputValue: "",
-      todoItems: [],
-    }
-  }
+export default function Todo() {
+  const [inputValue, setInputValue] = useState("")
+  const [todoItems, setTodoItems] = useState([])
 
-  handleInputChange = event => {
-    this.setState({ inputValue: event.target.value })
-  }
-
-  formSubmit = event => {
+  const formSubmit = event => {
     event.preventDefault()
-    this.setState({ inputValue: "" })
-    this.setState({
-      todoItems: [...this.state.todoItems, this.state.inputValue],
-    })
+    setTodoItems([...todoItems, inputValue])
+    setInputValue("")
   }
 
-  deleteItem = index => {
-    let newItemList = this.state.todoItems;
-    this.state.todoItems.splice(index, 1)
-    this.setState({ todoItems: newItemList })
+  const deleteItem = index => {
+    let newItemList = todoItems
+    newItemList.splice(index, 1)
+    setTodoItems([...newItemList])
   }
 
-  render() {
-    return (
-      <div>
-        <h1>ToDo List</h1>
-        <form onSubmit={this.formSubmit}>
-          <input
-            value={this.state.inputValue}
-            type="text"
-            onChange={this.handleInputChange}
-          />
-          <input value="Submit" type="submit" />
-        </form>
+  return (
+    <div>
+      <h1>ToDo List</h1>
+      <form onSubmit={formSubmit}>
+        <input
+          value={inputValue}
+          type="text"
+          onChange={e => setInputValue(e.target.value)}
+        />
+        <input value="Submit" type="submit" />
+      </form>
 
-        {this.state.todoItems.length > 0
-          ? this.state.todoItems.map((item, index) => {
-              return (
-                <TodoItem
-                  item={item}
-                  index={index}
-                  deleteItem={this.deleteItem}
-                ></TodoItem>
-              )
-            })
-          : ""}
-      </div>
-    )
-  }
+      {todoItems.length > 0
+        ? todoItems.map((item, index) => {
+            return (
+              <TodoItem
+                item={item}
+                index={index}
+                deleteItem={deleteItem}
+              ></TodoItem>
+            )
+          })
+        : ""}
+    </div>
+  )
 }
-
-export default Navigation

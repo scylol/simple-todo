@@ -1,40 +1,27 @@
-import React from "react"
+import React, { useState } from "react"
 
-class TodoItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      checkedOff: false,
-    }
-  }
+export default function TodoItem(props) {
+  const [checkedOff, setCheckedOff] = useState(false)
 
-  checkOff = () => {
-    this.setState({ checkedOff: !this.state.checkedOff })
+  const checkedOffStyle = {
+    textDecoration: "line-through",
+    cursor: "pointer",
+    display: "inline",
+    paddingRight: "32px",
   }
-
-  render() {
-    const checkedOffStyle = {
-      textDecoration: "line-through",
-      cursor: "pointer",
-      display: "inline",
-      paddingRight: "32px",
-    }
-    return (
-      <div style={{ padding: "16px" }}>
-        <li
-          style={
-            this.state.checkedOff
-              ? checkedOffStyle
-              : { cursor: "pointer", paddingRight: "32px", display: "inline" }
-          }
-          onClick={this.checkOff}
-        >
-          {this.props.item}
-        </li>
-        <button onClick={() => this.props.deleteItem(this.props.index)}>X</button>
-      </div>
-    )
-  }
+  return (
+    <div style={{ padding: "16px" }}>
+      <li
+        style={
+          checkedOff
+            ? checkedOffStyle
+            : { cursor: "pointer", paddingRight: "32px", display: "inline" }
+        }
+        onClick={() => setCheckedOff(!checkedOff)}
+      >
+        {props.item}
+      </li>
+      <button onClick={() => props.deleteItem(props.index)}>X</button>
+    </div>
+  )
 }
-
-export default TodoItem
