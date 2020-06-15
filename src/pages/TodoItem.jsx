@@ -1,14 +1,14 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 export default function TodoItem(props) {
-  const [checkedOff, setCheckedOff] = useState(false)
+  const [checkedOff, setCheckedOff] = useState(false);
 
   const checkedOffStyle = {
     textDecoration: "line-through",
     cursor: "pointer",
     display: "inline",
     paddingRight: "32px",
-  }
+  };
   return (
     <div style={{ padding: "16px" }}>
       <li
@@ -23,5 +23,5 @@ export default function TodoItem(props) {
       </li>
       <button onClick={() => props.deleteItem(props.index)}>X</button>
     </div>
-  )
+  );
 }

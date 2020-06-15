@@ -1,21 +1,21 @@
-import React, { useState } from "react"
-import TodoItem from "./TodoItem"
+import React, { useState } from "react";
+import TodoItem from "./TodoItem";
 
 export default function Todo() {
-  const [inputValue, setInputValue] = useState("")
-  const [todoItems, setTodoItems] = useState([])
+  const [inputValue, setInputValue] = useState("");
+  const [todoItems, setTodoItems] = useState([]);
 
   const formSubmit = event => {
-    event.preventDefault()
-    setTodoItems([...todoItems, inputValue])
-    setInputValue("")
-  }
+    event.preventDefault();
+    setTodoItems([...todoItems, inputValue]);
+    setInputValue("");
+  };
 
   const deleteItem = index => {
-    let newItemList = todoItems
-    newItemList.splice(index, 1)
-    setTodoItems([...newItemList])
-  }
+    let newItemList = todoItems;
+    newItemList.splice(index, 1);
+    setTodoItems([...newItemList]);
+  };
 
   return (
     <div>
@@ -37,9 +37,9 @@ export default function Todo() {
                 index={index}
                 deleteItem={deleteItem}
               ></TodoItem>
-            )
+            );
           })
         : ""}
     </div>
-  )
+  );
 }
